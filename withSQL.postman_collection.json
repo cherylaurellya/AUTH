@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "488add10-b532-43a9-9391-7d2718370a3b",
+		"name": "withSQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47980287",
+		"_collection_link": "https://cherylaurellya577-6571604.postman.co/workspace/Cheryl-Aurellya's-Workspace~3bc66b72-2acc-416e-8d2d-36caad74db72/collection/47980287-488add10-b532-43a9-9391-7d2718370a3b?action=share&source=collection_link&creator=47980287"
+	},
+	"item": [
+		{
+			"name": "MoviegetAll",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "MoviegetByID",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "MoviePost",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "MoviePut",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "MovieDell",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DirectorsgetAll",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DirectorsgetByID",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DirectorsPost",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DirectorsPut",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DirectorsDell",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
