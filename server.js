@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 // const cors = require('cors');
 const express = require('express');
@@ -14,6 +15,10 @@ app.use(cors());
 
 //middleware data
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Selamat datang di Rest API!');
+});
 
 let directors = [
     { id: 1, name: "Don Hall", birthYear: 1980},
