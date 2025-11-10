@@ -1,7 +1,7 @@
 require('dotenv').config();
-const cors = require('cors');
+// const cors = require('cors');
 const express = require('express');
-const { dbMovies} = require('./database.js');
+const pool = require('./database.js');
 // const {dbDirectors} = require('./database.js');
 const app = express();
 const port = process.env.PORT || 3300;
@@ -15,18 +15,18 @@ app.use(cors());
 //middleware data
 app.use(express.json());
 
-// let directors = [
-//     { id: 1, name: "Don Hall", birthYear: 1980},
-//     { id: 2, name: "Jon Watts", birthYear: 1985},
-//     { id: 3, name: "Pete Docter", birthYear: 1990},
+let directors = [
+    { id: 1, name: "Don Hall", birthYear: 1980},
+    { id: 2, name: "Jon Watts", birthYear: 1985},
+    { id: 3, name: "Pete Docter", birthYear: 1990},
 
-// ];
-
-let movies = [
-  { id: 1, title: "Moana", director: "Don Hall", year: 2016 },
-  { id: 2, title: "Spiderman", director: "Jon Watts", year: 2018 },
-  { id: 3, title: "Inside Out", director: "Pete Docter", year: 2015 }
 ];
+
+// let movies = [
+//   { id: 1, title: "Moana", director: "Don Hall", year: 2016 },
+//   { id: 2, title: "Spiderman", director: "Jon Watts", year: 2018 },
+//   { id: 3, title: "Inside Out", director: "Pete Docter", year: 2015 }
+// ];
 
     app.get('/status', (req, res) => {
         res.json({
@@ -37,81 +37,81 @@ let movies = [
     }
 );
 
-// app.get('/directors', (req, res) => {
-//     const sql = "SELECT * FROM directors ORDER BY id ASC";
-//     dbDirectors.all(sql, [], (err, rows) => {
-//         if (err) {
-//             return res.status(400).json({"error": err.message});
-//         }
-//         res.json(rows);
-//     });
-// });
+app.get('/directors',async, (req, res) => {
+    const sql = "SELECT * FROM directors ORDER BY id ASC";
+    dbDirectors.all(sql, [], (err, rows) => {
+        if (err) {
+            return res.status(400).json({"error": err.message});
+        }
+        res.json(rows);
+    });
+});
 
-// app.get('/directors/:id', (req, res) => {
-//     const sql = "SELECT * FROM directors WHERE id = ?";
-//     const id = Number(req.params.id);
+app.get('/directors/:id',async, (req, res) => {
+    const sql = "SELECT * FROM directors WHERE id = ?";
+    const id = Number(req.params.id);
 
-//     dbDirectors.get(sql, [id], (err, row) => {
-//         if (err) {
-//             return res.status(500).json({ error: err.message });
-//         }
-//         if (row) {
-//             res.json(row);
-//         } else {
-//             res.status(404).json({ error: 'Film tidak ditemukan' });
-//         }
-//     });
-// });
+    dbDirectors.get(sql, [id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (row) {
+            res.json(row);
+        } else {
+            res.status(404).json({ error: 'Film tidak ditemukan' });
+        }
+    });
+});
 
 
-// app.post('/directors',authenticateToken, (req, res) => {
-//     const { name, birthYear } = req.body;
-//     if (!name || !birthYear) {
-//         return res.status(400).json({ error: `name, birthYear is required`});
-//     }
-//     const sql =  'INSERT INTO directors (name, birthYear) VALUES (?,?)';
-//     dbDirectors.run(sql, [name, birthYear], function(err) {
-//         if (err) {
-//             return res.status(500).json({error: err.message});
-//         }
-//         res.status(201).json({id: this.lastID, name, birthYear});
-//     });
-// });
+app.post('/directors',authenticateToken, async (req, res) => {
+    const { name, birthYear } = req.body;
+    if (!name || !birthYear) {
+        return res.status(400).json({ error: `name, birthYear is required`});
+    }
+    const sql =  'INSERT INTO directors (name, birthYear) VALUES (?,?)';
+    dbDirectors.run(sql, [name, birthYear], function(err) {
+        if (err) {
+            return res.status(500).json({error: err.message});
+        }
+        res.status(201).json({id: this.lastID, name, birthYear});
+    });
+});
 
-// app.put('/directors/:id',authenticateToken, (req, res) => {
-//     const { name, birthYear } = req.body;
-//     const id = Number(req.params.id);
+app.put('/directors/:id',authenticateToken, async (req, res) => {
+    const { name, birthYear } = req.body;
+    const id = Number(req.params.id);
 
-//     if (!name || !birthYear) {
-//         return res.status(400).json({ error: 'name and birthYear are required' });
-//     }
+    if (!name || !birthYear) {
+        return res.status(400).json({ error: 'name and birthYear are required' });
+    }
 
-//     const sql = 'UPDATE directors SET name = ?, birthYear = ? WHERE id = ?';
-//     dbDirectors.run(sql, [name, birthYear, id], function(err) { 
-//         if (err) {
-//             return res.status(500).json({ error: err.message });
-//         }
-//         if (this.changes === 0) {
-//             return res.status(404).json({ error: "directors tidak ditemukan" });
-//         }
-//         res.json({ id, name, birthYear });
-//     });
-// });
+    const sql = 'UPDATE directors SET name = ?, birthYear = ? WHERE id = ?';
+    dbDirectors.run(sql, [name, birthYear, id], function(err) { 
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (this.changes === 0) {
+            return res.status(404).json({ error: "directors tidak ditemukan" });
+        }
+        res.json({ id, name, birthYear });
+    });
+});
 
-// app.delete('/directors/:id',authenticateToken, (req, res) => {
-//     const sql = 'DELETE FROM directors WHERE id = ?';
-//     const id = Number(req.params.id);
+app.delete('/directors/:id',authenticateToken,async (req, res) => {
+    const sql = 'DELETE FROM directors WHERE id = ?';
+    const id = Number(req.params.id);
 
-//     dbDirectors.run(sql, id, function(err) {
-//         if (err) {
-//             return res.status(500).json({error: err.message});
-//         }
-//         if (this.changes === 0) {
-//             return res.status(400).json({error: "Directors tidak ditemukan"});
-//         }
-//         res.status(204).send();
-//     });
-// });
+    dbDirectors.run(sql, id, function(err) {
+        if (err) {
+            return res.status(500).json({error: err.message});
+        }
+        if (this.changes === 0) {
+            return res.status(400).json({error: "Directors tidak ditemukan"});
+        }
+        res.status(204).send();
+    });
+});
 
 
 
@@ -128,7 +128,7 @@ let movies = [
     }
 );
 
-app.get('/movies', (req, res) => {
+app.get('/movies',async, (req, res) => {
     const sql = "SELECT * FROM movies ORDER BY id ASC";
     dbMovies.all(sql, [], (err, rows) => {
         if (err) {
@@ -138,7 +138,7 @@ app.get('/movies', (req, res) => {
     });
 });
 
-app.get('/movies/:id', (req, res) => {
+app.get('/movies/:id',async, (req, res) => {
     const sql = "SELECT * FROM movies WHERE id = ?";
     const id = Number(req.params.id);
 
@@ -154,7 +154,7 @@ app.get('/movies/:id', (req, res) => {
     });
 });
 
-app.post('/movies',authenticateToken, (req, res) => {
+app.post('/movies',authenticateToken,async, (req, res) => {
     const { title, director, year } = req.body;
     if (!title || !director || !year) {
         return res.status(400).json({ error: 'title, director, dan year wajib diisi' });
@@ -169,8 +169,7 @@ app.post('/movies',authenticateToken, (req, res) => {
     });
 });
 
-// PUT Movie (Update)
-app.put('/movies/:id', authenticateToken,(req, res) => {
+app.put('/movies/:id', authenticateToken,async (req, res) => {
   const { title, director, year } = req.body;
   const { id } = req.params;
 
@@ -188,7 +187,7 @@ app.put('/movies/:id', authenticateToken,(req, res) => {
 });
 
 
-app.delete('/movies/:id',authenticateToken, (req, res) => {
+app.delete('/movies/:id',authenticateToken,async (req, res) => {
     const sql = 'DELETE FROM movies WHERE id = ?';
     const id = Number(req.params.id);
 
@@ -203,7 +202,7 @@ app.delete('/movies/:id',authenticateToken, (req, res) => {
     });
 });
 
-app.post('/auth/register', (req, res) => {
+app.post('/auth/register',async (req, res) => {
     const { username, password} = req.body;
     if (!username || !password || password.length < 6) {
         return res.status(400).json({ error: 'Username dan password (min 6 char) harus diisi'});
@@ -244,7 +243,7 @@ dbMovies.run(sql, params, function(err) {
 // });
 // });
 
-app.post('/auth/login', (req, res) => {
+app.post('/auth/login',async (req, res) => {
     const {username, password} = req.body;
     if (!username || !password) {
         return res.status(400).json({ error: 'Username dan password harus diisi'});
@@ -269,6 +268,12 @@ app.post('/auth/login', (req, res) => {
                 res.json({ message: 'Login Berhasil', token: token});
             });
         });
+    });
+});
+
+app.get('/profile', authenticateToken, (req,res) => {
+    res.json({
+        message: 'Token Valid', user: req.user.user
     });
 });
 
@@ -407,6 +412,8 @@ app.post('/auth/login', (req, res) => {
 //     res.status(204).send();
 // })
 
-app.listen(port, () => {
-    console.log(`Server Running on ${port}`);
-});
+module.exports = app;
+
+// app.listen(port, () => {
+//     console.log(`Server Running on ${port}`);
+// });

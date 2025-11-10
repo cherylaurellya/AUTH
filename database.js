@@ -1,8 +1,12 @@
+const { Pool } = require('pg');
+
 require('dotenv').config();
-const sqlite3 = require('sqlite3').verbose();
+const pool  = new Pool({
+    connectionString: process.env.POSTGRES_URL,
+});
 
 // const DBSOURCE_1 = process.env.DB_SOURCE_1 || "db.sqlite";
-const DBSOURCE_2 = process.env.DB_SOURCE_2 || "db.sqlite";
+// const DBSOURCE_2 = process.env.DB_SOURCE_2 || "db.sqlite";
 
 // const dbMovies = new sqlite3.Database(DBSOURCE_1, (err) => {
 //     if (err) {
@@ -41,45 +45,45 @@ const DBSOURCE_2 = process.env.DB_SOURCE_2 || "db.sqlite";
         
 
 
-const dbDirectors = new sqlite3.Database(DBSOURCE_2, (err) => {
-    if (err) {
-        console.error("Error:", err.message);
-        throw err;
-    }
-    console.log(`Berhasil terhubung ke database: ${DBSOURCE_2}`);
-    dbDirectors.run(
-        `CREATE TABLE IF NOT EXISTS directors (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            birthYear INTEGER NOT NULL
-        )`,
-        (err) => {
-            if (!err) {
-                console.log("Tabel 'directors' berhasil dibuat. Masukan data awal....");
-                const insert = 'INSERT INTO directors (name, birthYear) VALUES (?,?)';
-                dbDirectors.run(insert, ["Don Hall", 1980]);
-                dbDirectors.run(insert, ["Jon Watts", 1985]);
-                dbDirectors.run(insert, ["Pete Docter", 1990]);
-            } else {
-                console.log("Tabel 'directors' sudah ada");
-            }
-        }
-    );
-});
+// const dbDirectors = new sqlite3.Database(DBSOURCE_2, (err) => {
+//     if (err) {
+//         console.error("Error:", err.message);
+//         throw err;
+//     }
+//     console.log(`Berhasil terhubung ke database: ${DBSOURCE_2}`);
+//     dbDirectors.run(
+//         `CREATE TABLE IF NOT EXISTS directors (
+//             id INTEGER PRIMARY KEY AUTOINCREMENT,
+//             name TEXT NOT NULL,
+//             birthYear INTEGER NOT NULL
+//         )`,
+//         (err) => {
+//             if (!err) {
+//                 console.log("Tabel 'directors' berhasil dibuat. Masukan data awal....");
+//                 const insert = 'INSERT INTO directors (name, birthYear) VALUES (?,?)';
+//                 dbDirectors.run(insert, ["Don Hall", 1980]);
+//                 dbDirectors.run(insert, ["Jon Watts", 1985]);
+//                 dbDirectors.run(insert, ["Pete Docter", 1990]);
+//             } else {
+//                 console.log("Tabel 'directors' sudah ada");
+//             }
+//         }
+//     );
+// });
 
-dbDirectors.run(`CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL
-        );`, (err) => {
-            if (err) {
-                console.error("Gagal membuat tabel users:", err.message);
-            } else {
-                console.log("Tabel 'users' siap digunakan.");
-            }
-        });
+// dbDirectors.run(`CREATE TABLE IF NOT EXISTS users (
+//             id INTEGER PRIMARY KEY AUTOINCREMENT,
+//             username TEXT NOT NULL UNIQUE,
+//             password TEXT NOT NULL
+//         );`, (err) => {
+//             if (err) {
+//                 console.error("Gagal membuat tabel users:", err.message);
+//             } else {
+//                 console.log("Tabel 'users' siap digunakan.");
+//             }
+//         });
 
-    module.exports = { dbDirectors };
+    module.exports = pool;
 
 // module.exports =
 //   dbMovies
