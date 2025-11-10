@@ -1,19 +1,16 @@
-
 require('dotenv').config();
-// const cors = require('cors');
 const express = require('express');
-const pool = require('./database.js');
-// const {dbDirectors} = require('./database.js');
-const app = express();
-const port = process.env.PORT || 3300;
+const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET;
+const { dbDirectors, dbMovies } = require('./database.js'); // pastikan database.js export dua db ini
 const authenticateToken = require('./Middleware/authMiddleware.js');
-app.use(cors());
-// const port = 3100;
 
-//middleware data
+const app = express();
+const port = process.env.PORT || 3300;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
