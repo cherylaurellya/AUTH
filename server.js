@@ -39,7 +39,7 @@ let directors = [
     }
 );
 
-app.get('/directors',async, (req, res) => {
+app.get('/directors', async (req, res) => {
     const sql = "SELECT * FROM directors ORDER BY id ASC";
     dbDirectors.all(sql, [], (err, rows) => {
         if (err) {
@@ -49,7 +49,7 @@ app.get('/directors',async, (req, res) => {
     });
 });
 
-app.get('/directors/:id',async, (req, res) => {
+app.get('/directors/:id', async (req, res) => {
     const sql = "SELECT * FROM directors WHERE id = ?";
     const id = Number(req.params.id);
 
@@ -100,7 +100,7 @@ app.put('/directors/:id',authenticateToken, async (req, res) => {
     });
 });
 
-app.delete('/directors/:id',authenticateToken,async (req, res) => {
+app.delete('/directors/:id',authenticateToken, async (req, res) => {
     const sql = 'DELETE FROM directors WHERE id = ?';
     const id = Number(req.params.id);
 
@@ -115,11 +115,9 @@ app.delete('/directors/:id',authenticateToken,async (req, res) => {
     });
 });
 
-
-
     app.get('/', (req,res) => {
-   res.send('Selamat Datang diserver Node.js')
-    });
+    res.send('Selamat Datang diserver Node.js')
+        });
 
     app.get('/status', (req, res) => {
         res.json({
@@ -130,7 +128,7 @@ app.delete('/directors/:id',authenticateToken,async (req, res) => {
     }
 );
 
-app.get('/movies',async, (req, res) => {
+app.get('/movies', async (req, res) => {
     const sql = "SELECT * FROM movies ORDER BY id ASC";
     dbMovies.all(sql, [], (err, rows) => {
         if (err) {
@@ -140,7 +138,7 @@ app.get('/movies',async, (req, res) => {
     });
 });
 
-app.get('/movies/:id',async, (req, res) => {
+app.get('/movies/:id', async (req, res) => {
     const sql = "SELECT * FROM movies WHERE id = ?";
     const id = Number(req.params.id);
 
@@ -156,7 +154,7 @@ app.get('/movies/:id',async, (req, res) => {
     });
 });
 
-app.post('/movies',authenticateToken,async, (req, res) => {
+app.post('/movies',authenticateToken, async (req, res) => {
     const { title, director, year } = req.body;
     if (!title || !director || !year) {
         return res.status(400).json({ error: 'title, director, dan year wajib diisi' });
@@ -171,7 +169,7 @@ app.post('/movies',authenticateToken,async, (req, res) => {
     });
 });
 
-app.put('/movies/:id', authenticateToken,async (req, res) => {
+app.put('/movies/:id', authenticateToken, async (req, res) => {
   const { title, director, year } = req.body;
   const { id } = req.params;
 
@@ -189,7 +187,7 @@ app.put('/movies/:id', authenticateToken,async (req, res) => {
 });
 
 
-app.delete('/movies/:id',authenticateToken,async (req, res) => {
+app.delete('/movies/:id',authenticateToken, async (req, res) => {
     const sql = 'DELETE FROM movies WHERE id = ?';
     const id = Number(req.params.id);
 
@@ -204,7 +202,7 @@ app.delete('/movies/:id',authenticateToken,async (req, res) => {
     });
 });
 
-app.post('/auth/register',async (req, res) => {
+app.post('/auth/register', async (req, res) => {
     const { username, password} = req.body;
     if (!username || !password || password.length < 6) {
         return res.status(400).json({ error: 'Username dan password (min 6 char) harus diisi'});
@@ -245,7 +243,7 @@ dbMovies.run(sql, params, function(err) {
 // });
 // });
 
-app.post('/auth/login',async (req, res) => {
+app.post('/auth/login', async (req, res) => {
     const {username, password} = req.body;
     if (!username || !password) {
         return res.status(400).json({ error: 'Username dan password harus diisi'});
@@ -302,8 +300,6 @@ app.get('/profile', authenticateToken, (req,res) => {
 // });
 
 
-
-
 //    app.get('/directors', (req, res) => {
 //     res.json(directors);
 //  });
@@ -357,62 +353,6 @@ app.get('/profile', authenticateToken, (req,res) => {
 // app.listen(port, () => {
 //      console.log(`Server Running on localhost: ${port}`);
 //  });
-
-
-
-// //dummy data
-
-
-
-// app.get('/', (req,res) => {
-//     res.send('Selamat Datang diserver Node.js')
-
-// });
-
-// app.get('/movies', (req, res) => {
-//     res.json(movies);
-// });
-
-// app.get('/movies/:id', (req, res) => {
-//     const movie = movies.find(m => m.id === parseInt(req.params.id));
-//     if (movie) {
-//         res.json(movie);
-//     } else {
-//         res.status(404).send('Movie not found');
-//     }
-// });
-
-// app.post('/movies', (req, res) => {
-//     const {title, director, year} = req.body || {};
-//     if (!title || !director || !year) {
-//         return res.status(400).json({error: 'title, director, year wajib diisi'});
-//     }
-//     const newMovie = {id: movies.length +1, title, director, year};
-//     movies.push(newMovie);
-//     res.status(201).json(newMovie);
-// });
-
-// app.put('/movies/:id', (req, res) => {
-//     const id = Number(req.params.id);
-//     const movieIndex = movies.findIndex(m => m.id === id);
-//     if (movieIndex === -1) {
-//         return res.status(404).json({error: 'Movie tidak ditemukan'});
-//     }
-//     const{title, director, year} = req.body || {};
-//     const updatedMovie = {id, title, director, year};
-//     movies[movieIndex] = updatedMovie;
-//     res.json(updatedMovie);
-// });
-
-// app.delete('/movies/:id', (req, res) => {
-//     const id = Number(req.params.id);
-//     const movieIndex = movies.findIndex(m =>  m.id === id);
-//     if (movieIndex === -1) {
-//         return res.status(404).json({error: 'Movie tidak ditemukan'});
-//     }
-//     movies.splice(movieIndex, 1);
-//     res.status(204).send();
-// })
 
 module.exports = app;
 
