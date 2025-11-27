@@ -1,36 +1,26 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET;
+require('dotenv').config();
 
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
 
-    if (token == null) {
-        return res.status(401).json({ error: `Akses ditolak, token tidak ditemukan`});
-    }
+  if (!token) return res.status(401).json({ error: 'Akses ditolak, token tidak tersedia' });
 
-    jwt.verify(token, JWT_SECRET, (err, decodedPayload) => {
-        if (err) {
-            console.error("JWT verify Error:, err.massage");
-            return res.status(403).json({ error: `Token tidak valid atau kadaluwarsa`});
-        }
-        req.user = decodedPayload.user;
-        next();
-    });
-}
-function authorizeRole(role) {
-    return (req, res, next) => {
-        if (req.user && req.user.role === role) {
-            next();
-        } else {
-            return res.status(403).json({
-                error: 'Akses Dilarang: Peran tidak memadai'
-            });
-        }
-    };
-}
-
-module.exports = {
-    authenticateToken,
-    authorizeRole
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ error: 'Token tidak valid' });
+    req.user = user;
+    next();
+  });
 };
+
+const authorizeRole = (role) => {
+  return (req, res, next) => {
+    if (req.user.user.role !== role) {
+      return res.status(403).json({ error: 'Akses ditolak, peran tidak sesuai' });
+    }
+    next();
+  };
+};
+
+module.exports = { authenticateToken, authorizeRole };
