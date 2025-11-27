@@ -18,5 +18,19 @@ function authenticateToken(req, res, next) {
         next();
     });
 }
+function authorizeRole(role) {
+    return (req, res, next) => {
+        if (req.user && req.user.role === role) {
+            next();
+        } else {
+            return res.status(403).json({
+                error: 'Akses Dilarang: Peran tidak memadai'
+            });
+        }
+    };
+}
 
-module.exports = authenticateToken;
+module.exports = {
+    authenticateToken,
+    authorizeRole
+};
