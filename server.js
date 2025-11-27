@@ -4,7 +4,7 @@ const cors = require('cors');
 const db = require('./db.js'); // Koneksi ke file db.js yang baru
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { authenticateToken, authorizeRole } = require('./middleware/auth.js'); // Pastikan path middleware benar
+const { authenticateToken, authorizeRole } = require('./auth.js'); // Pastikan path middleware benar
 
 const app = express();
 const PORT = process.env.PORT || 3300;
