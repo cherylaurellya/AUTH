@@ -1,0 +1,533 @@
+{
+	"info": {
+		"_postman_id": "a57eb22a-9834-4bfc-bc52-b5d2c2758460",
+		"name": "vercel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47980287",
+		"_collection_link": "https://cherylaurellya577-6571604.postman.co/workspace/Cheryl-Aurellya's-Workspace~3bc66b72-2acc-416e-8d2d-36caad74db72/collection/47980287-a57eb22a-9834-4bfc-bc52-b5d2c2758460?action=share&source=collection_link&creator=47980287"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"cheryl\",\r\n    \"password\": \"300607\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-nf8k.vercel.app/auth/register",
+					"protocol": "https",
+					"host": [
+						"auth-nf8k",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://auth-nf8k.vercel.app/movies",
+					"protocol": "https",
+					"host": [
+						"auth-nf8k",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"cheryl\",\r\n    \"password\": \"300607\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-nf8k.vercel.app/auth/login",
+					"protocol": "https",
+					"host": [
+						"auth-nf8k",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST MOVIES",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJ1c2VybmFtZSI6ImNoZXJ5bGEiLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3NjQzMDIwNTEsImV4cCI6MTc2NDMwNTY1MX0.BO9n13odYdu9QHO7oMtCniuwBMNPlbP2TujNyXOx_7I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Little Mermaid\",\r\n  \"year\": 2019,\r\n  \"director_id\": 1 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-hcp6.vercel.app/movies",
+					"protocol": "https",
+					"host": [
+						"auth-hcp6",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJ1c2VybmFtZSI6ImNoZXJ5bGEiLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3NjQzMDIwNTEsImV4cCI6MTc2NDMwNTY1MX0.BO9n13odYdu9QHO7oMtCniuwBMNPlbP2TujNyXOx_7I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Little Mermaid\",\r\n  \"year\": 2012,\r\n  \"director_id\": 1 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-hcp6.vercel.app/movies/1",
+					"protocol": "https",
+					"host": [
+						"auth-hcp6",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJ1c2VybmFtZSI6ImNoZXJ5bGEiLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3NjQzMDIwNTEsImV4cCI6MTc2NDMwNTY1MX0.BO9n13odYdu9QHO7oMtCniuwBMNPlbP2TujNyXOx_7I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://auth-hcp6.vercel.app/movies/1",
+					"protocol": "https",
+					"host": [
+						"auth-hcp6",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTER ADMIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"aurel\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-nf8k.vercel.app/auth/register-admin",
+					"protocol": "https",
+					"host": [
+						"auth-nf8k",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"auth",
+						"register-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN ADMIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"aurel\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-nf8k.vercel.app/auth/login",
+					"protocol": "https",
+					"host": [
+						"auth-nf8k",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE SBG ADMIN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6ImF1cmVsIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc2NDMwNDE3OSwiZXhwIjoxNzY0MzA3Nzc5fQ.FtnpDphpoJ1qjELvI9MykJbOg7mRMdDYLVkCjs9ryAM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://auth-hcp6.vercel.app/movies/1",
+					"protocol": "https",
+					"host": [
+						"auth-hcp6",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT SBG ADMIN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6ImF1cmVsIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc2NDMwNDE3OSwiZXhwIjoxNzY0MzA3Nzc5fQ.FtnpDphpoJ1qjELvI9MykJbOg7mRMdDYLVkCjs9ryAM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"title\": \"Zootopia\",\r\n    \"year\": 2023,\r\n    \"director_id\": 2,\r\n    \"director_name\": \"Greta Gerwig\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-hcp6.vercel.app/movies/2",
+					"protocol": "https",
+					"host": [
+						"auth-hcp6",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"movies",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST DIRECTORS ADMIN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6ImF1cmVsIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc2NDMwNDE3OSwiZXhwIjoxNzY0MzA3Nzc5fQ.FtnpDphpoJ1qjELvI9MykJbOg7mRMdDYLVkCjs9ryAM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"id\": 1,\r\n    \"name\": \"Christopher Nolan\",\r\n    \"birthYear\": 1980\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-1zk7.vercel.app/directors",
+					"protocol": "https",
+					"host": [
+						"auth-1zk7",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"directors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT DIRECTORS SBG ADMI",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6ImF1cmVsIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc2NDMwNDE3OSwiZXhwIjoxNzY0MzA3Nzc5fQ.FtnpDphpoJ1qjELvI9MykJbOg7mRMdDYLVkCjs9ryAM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"id\": 1,\r\n    \"name\": \"Yandy Laurens\",\r\n    \"birthYear\": 1990\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://auth-1zk7.vercel.app/directors/1",
+					"protocol": "https",
+					"host": [
+						"auth-1zk7",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"directors",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE DIRECTORES SBG ADMIN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6ImF1cmVsIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc2NDMwNDE3OSwiZXhwIjoxNzY0MzA3Nzc5fQ.FtnpDphpoJ1qjELvI9MykJbOg7mRMdDYLVkCjs9ryAM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://auth-1zk7.vercel.app/directors/1",
+					"protocol": "https",
+					"host": [
+						"auth-1zk7",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"directors",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET MOVIES",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6ImF1cmVsIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc2NDMwNDE3OSwiZXhwIjoxNzY0MzA3Nzc5fQ.FtnpDphpoJ1qjELvI9MykJbOg7mRMdDYLVkCjs9ryAM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://auth-hcp6.vercel.app/movies",
+					"protocol": "https",
+					"host": [
+						"auth-hcp6",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET DIRECTORS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJ1c2VybmFtZSI6ImF1cmVsIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTc2NDMwNDE3OSwiZXhwIjoxNzY0MzA3Nzc5fQ.FtnpDphpoJ1qjELvI9MykJbOg7mRMdDYLVkCjs9ryAM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://auth-hcp6.vercel.app/directors",
+					"protocol": "https",
+					"host": [
+						"auth-hcp6",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"directors"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "login",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
